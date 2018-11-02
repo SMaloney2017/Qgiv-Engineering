@@ -23,8 +23,6 @@
 
 - bonus: add dynamic table sorting   
 - bonus: add pagination
-
-- submit a Pull Request when complete
 */
 ?>
 <!DOCTYPE html>
