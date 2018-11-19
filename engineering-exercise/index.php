@@ -20,6 +20,7 @@
 - default sorted by transaction ID
 - display a table of users with data displayed
 - clicking the user ID takes you to a view that displays that users details and associated transactions
+- note: logic should be built without utilizing PHP libraries
 
 - bonus: add dynamic table sorting   
 - bonus: add pagination
