@@ -1,5 +1,5 @@
 <?php 
-/**
+/*
 - create a database to hold transaction records and users
 - loads in a list of users from JSON: https://randomuser.me/api/?results=500&nat=us&exc=login,id,nat
     - add unique users to a database table
