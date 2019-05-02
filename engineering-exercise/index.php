@@ -25,6 +25,19 @@
 - bonus: add dynamic table sorting   
 - bonus: add pagination
 */
+
+/*
+If you need help setting up a development environment:
+    Download and run mamp from https://www.mamp.info/en/
+
+    After installation, run the MAMP app (should not need pro)
+    On Mac, located at /Applications/MAMP/MAMP
+    "Start Servers"
+
+    Your dev stack should be up and running locally. You can access the database through phpMyAdmin at http://localhost:8888/phpMyAdmin/?lang=en
+
+    Php and html should live in /Applications/MAMP/htdocs/
+*/
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
