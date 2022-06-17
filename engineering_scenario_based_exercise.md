@@ -55,6 +55,7 @@ Given a one-week (~50hrs) deadline for this project, my initial plan is to deleg
 
 ### Database Entity Relationship Diagram:
 * [first-draft](https://dbdiagram.io/d/62abf44e9921fe2a96250eea) (link to *dbdiagram.io*) <br>
+![Qgiv-Engineering-Assessment-ERD](https://user-images.githubusercontent.com/60162255/174400783-7afd6fcd-af96-48ce-9d7e-fa52eaa85dea.png)
 
 ---
 
@@ -71,3 +72,5 @@ Given a one-week (~50hrs) deadline for this project, my initial plan is to deleg
 * Clicking on an individual user will navigate to their user-page where information and transaction history can be dynamically mapped in tables.
 ### UML Sequence Diagram
 * [first-draft](https://lucid.app/lucidchart/e7746c38-7bc7-4e73-9b4d-c7687bf26bff/edit?invitationId=inv_67a00594-8c3f-4e4e-be34-37d5c0a29002#) (link to *lucid.app*) <br>
+![Qgiv-Engineering-Assessment-UML](https://user-images.githubusercontent.com/60162255/174400844-b52dd4d8-08f9-4276-b718-bec1d2a0839f.png)
+
