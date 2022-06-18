@@ -55,7 +55,7 @@ Given a one-week (~50hrs) deadline for this project, my initial plan is to deleg
 
 ### Database Entity Relationship Diagram:
 * [revised-draft](https://dbdiagram.io/d/62abf44e9921fe2a96250eea) (link to *dbdiagram.io*) <br>
-![Qgiv-Engineering-Assessment-ERD](https://user-images.githubusercontent.com/60162255/174442514-4e6dae13-8ae9-4476-82e6-87ca307ef078.png)
+![Qgiv-Engineering-Assessment-ERD](https://user-images.githubusercontent.com/60162255/174443043-23a22b19-f013-4f6e-898a-3f79ba9544b3.png)
 
 ---
 
