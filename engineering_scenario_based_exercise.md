@@ -54,8 +54,9 @@ Given a one-week (~50hrs) deadline for this project, my initial plan is to deleg
 * Populate a database with phony data to verify & test functionality.
 
 ### Database Entity Relationship Diagram:
-* [first-draft](https://dbdiagram.io/d/62abf44e9921fe2a96250eea) (link to *dbdiagram.io*) <br>
-![Qgiv-Engineering-Assessment-ERD](https://user-images.githubusercontent.com/60162255/174400783-7afd6fcd-af96-48ce-9d7e-fa52eaa85dea.png)
+* [revised-draft](https://dbdiagram.io/d/62abf44e9921fe2a96250eea) (link to *dbdiagram.io*) <br>
+![Qgiv-Engineering-Assessment-ERD](https://user-images.githubusercontent.com/60162255/174413920-df197b66-dec0-4d0f-a0a2-e12fda9d23c7.png)
+
 
 ---
 
