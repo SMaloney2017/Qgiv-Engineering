@@ -1,13 +1,13 @@
 <?php
 
-include 'Name.php';
-include 'Street.php';
-include 'Coordinates.php';
-include 'Location.php';
-include 'Timezone.php';
-include 'Dob.php';
-include 'Registered.php';
-include 'Picture.php';
+require 'Name.php';
+require 'Street.php';
+require 'Coordinates.php';
+require 'Location.php';
+require 'Timezone.php';
+require 'Dob.php';
+require 'Registered.php';
+require 'Picture.php';
 
 class User
 {
