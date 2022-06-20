@@ -130,7 +130,7 @@ try {
     <!-- begin building table which displays users -->
     <table class='data-table'>
         <thead>
-        <!-- build table headers -->
+        <!-- build table headers for either users or transactions -->
         <?php
         if ($_GET['radio'] == 'users') { ?>
             <tr class='ui-secondary-color'>
