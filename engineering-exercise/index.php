@@ -21,11 +21,13 @@
 
 - view a view of users with data displayed
 - clicking the user ID takes you to a view that displays that users details and associated transactions
+
 - note: logic should be built without utilizing PHP libraries
 
 - bonus: add dynamic view sorting
 - bonus: add pagination
 */
+
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -68,7 +70,9 @@
         <img class="logo" src="https://secure.qgiv.com/resources/core/images/logo-qgiv.svg" alt="Qgiv logo"/>
     </div>
 
-    <?php require 'UsersTable.php' ?>
+    <!-- list of users/transactions, including search, pagination, and (to-do) dynamic sorting  -->
+    <?php
+    require 'display.php' ?>
 
 </section>
 </body>
