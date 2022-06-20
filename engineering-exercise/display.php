@@ -160,7 +160,7 @@ try {
         if (!empty($results)) {
             /* for each item */
             foreach ($results as $row) {
-                /* is users radio-button selected */
+                /* if users radio-button selected */
                 if ($_GET['radio'] == 'users') { ?>
                     <!-- build a new table-row displaying user-id, email,
                          first name, and last name -->
@@ -173,6 +173,8 @@ try {
                     <!-- if transactions radio-button selected -->
                 <?php
                 } else { ?>
+                    <!-- build a new table-row displaying transaction-id, user-id,
+                         timestamp, amount, status, and payment method -->
                     <tr class='data-row'>
                         <td><?php echo $row['transaction_id'] ?></td>
                         <td><?php echo $row['user_id'] ?></td>
