@@ -9,16 +9,23 @@ const STATUS = array('Accepted', 'Declined');
 const PAYMENTS = array('Visa', 'Mastercard', 'Discover', 'American Express', 'eCheck');
 const URL = 'https://randomuser.me/api/?results=500&nat=us&exc=login,id,nat';
 
+/* create a connection to our database */
 $connection = new Connection();
 
+/* fetch users from randomuser.me api and decode into an object */
 $json_obj = json_decode(file_get_contents(URL));
 $json_results = $json_obj->results;
 
+/* for each user in the array of results */
 for ($i = 0; $i < count($json_results); $i++) {
+    /* create a new user object */
     $user = new User($i, $json_results[$i]);
+
+    /* insert user into the database */
     $connection->insertUserIntoDatabase($user);
 
-    /* randomly generate between 1 and 5 transactions for each user */
+    /* randomly generate between 1 and 5 transactions for each user,
+       insert transactions into database */
     $n = mt_rand(1, 5);
     for ($j = 0; $j < $n; $j++) {
         $parameters = generateRandomTransactionParameters();
