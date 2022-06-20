@@ -50,7 +50,7 @@ require 'htmlhead.php' ?>
         <img class="logo" src="https://secure.qgiv.com/resources/core/images/logo-qgiv.svg" alt="Qgiv logo"/>
     </div>
 
-    <!-- list of users/transactions, including search, pagination, and (to-do) dynamic sorting  -->
+    <!-- list of users/transactions, including search, pagination, and dynamic sorting  -->
     <?php
     require 'display.php' ?>
 
