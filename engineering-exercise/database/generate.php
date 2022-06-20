@@ -1,9 +1,9 @@
 <?php
 /*  a script for populating the database with users & randomly generated transactions */
 
-include './database/Connection.php';
-include './user/User.php';
-include './user/Transaction.php';
+include './Connection.php';
+include '../user/User.php';
+include '../user/Transaction.php';
 
 const STATUS = array('Accepted', 'Declined');
 const PAYMENTS = array('Visa', 'Mastercard', 'Discover', 'American Express', 'eCheck');
@@ -19,7 +19,7 @@ $json_results = $json_obj->results;
 /* for each user in the array of results */
 for ($i = 0; $i < count($json_results); $i++) {
     /* create a new user object */
-    $user = new User($i, $json_results[$i]);
+    $user = new User($i + 1, $json_results[$i]);
 
     /* insert user into the database */
     $connection->insertUserIntoDatabase($user);
@@ -31,7 +31,7 @@ for ($i = 0; $i < count($json_results); $i++) {
         $parameters = generateRandomTransactionParameters();
         $transaction = new Transaction($parameters[0], $parameters[1], $parameters[2]);
         $user->addTransaction($transaction);
-        $connection->insertIntoTableTransactions($i, $transaction);
+        $connection->insertIntoTableTransactions($i + 1, $transaction);
     }
 }
 
