@@ -82,7 +82,7 @@ class Connection
     }
 
     /**
-     * Insert parameters into the `users` table.
+     * Insert parameters into the `users` view.
      *
      * @param int $user_id
      * @param string $email
@@ -118,7 +118,7 @@ class Connection
     }
 
     /**
-     * Insert parameters into the `picture` table.
+     * Insert parameters into the `picture` view.
      *
      * @param int $user_id
      * @param Picture $picture
@@ -144,7 +144,7 @@ class Connection
     }
 
     /**
-     * Insert parameters into the `location` table.
+     * Insert parameters into the `location` view.
      *
      * @param int $user_id
      * @param Location $location
@@ -176,7 +176,7 @@ class Connection
     }
 
     /**
-     * Insert parameters into the `identification` table.
+     * Insert parameters into the `identification` view.
      *
      * @param int $user_id
      * @param string $gender
@@ -208,7 +208,7 @@ class Connection
     }
 
     /**
-     * Insert a transaction into the `transaction` table.
+     * Insert a transaction into the `transaction` view.
      *
      * @param int $user_id
      * @param Transaction $transaction
