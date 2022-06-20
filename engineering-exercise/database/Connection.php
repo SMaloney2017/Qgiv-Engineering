@@ -1,6 +1,6 @@
 <?php
 /*  creates a connection to the database. To be used in
-    conjunction with the User classes to populate and query the database. */
+    conjunction with the User classes to populate the database. */
 
 class Connection
 {
