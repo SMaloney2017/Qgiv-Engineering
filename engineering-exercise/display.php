@@ -294,8 +294,6 @@ require 'htmlhead.php' ?>
 <body>
 <form name='search' method='get'>
 
-    <!-- this php block builds the tools for selecting the current view and
-         querying the database, including search, sorting, and pagination -->
     <?php
     /* build radio buttons to select view (transactions / users) */
     buildRadioButton("radio", $radio, "transactions");
