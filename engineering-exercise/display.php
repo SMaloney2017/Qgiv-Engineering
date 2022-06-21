@@ -159,13 +159,15 @@ function buildTableEntries(array $results, array $attributes): void
         foreach ($results as $row) {
             echo "<tr class='data-row'>";
             foreach ($attributes as $a) {
-                if($a == 'timestamp') {
+                if ($a == 'timestamp') {
                     $formatted_date = date('m/d/Y', strtotime($row[$a]));
                     echo "<td>$formatted_date</td>";
-                } else if ($a == 'user_id') {
-                    echo "<td><a href='userinfo.php?id=$row[$a]'>$row[$a]</a></td>";
                 } else {
-                    echo "<td>$row[$a]</td>";
+                    if ($a == 'user_id') {
+                        echo "<td><a href='userinfo.php?id=$row[$a]'>$row[$a]</a></td>";
+                    } else {
+                        echo "<td>$row[$a]</td>";
+                    }
                 }
             }
             echo "</tr>";
@@ -286,7 +288,8 @@ try {
 <html class="no-js" lang="en"> <!--<![endif]-->
 
 <!-- we can reuse the header to share style across multiple pages -->
-<?php require 'htmlhead.php' ?>
+<?php
+require 'htmlhead.php' ?>
 
 <body>
 <form name='search' method='get'>
