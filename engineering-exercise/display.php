@@ -159,7 +159,10 @@ function buildTableEntries(array $results, array $attributes): void
         foreach ($results as $row) {
             echo "<tr class='data-row'>";
             foreach ($attributes as $a) {
-                if ($a == 'user_id') {
+                if($a == 'timestamp') {
+                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
+                    echo "<td>$formatted_date</td>";
+                } else if ($a == 'user_id') {
                     echo "<td><a href='userinfo.php?id=$row[$a]'>$row[$a]</a></td>";
                 } else {
                     echo "<td>$row[$a]</td>";
