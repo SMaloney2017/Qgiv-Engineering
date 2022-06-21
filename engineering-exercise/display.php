@@ -122,7 +122,8 @@ function buildMenuEntries(string $sorting, array $attributes): void
  * @param string $value
  * @return void
  */
-function buildSearchField(string $value): void {
+function buildSearchField(string $value): void
+{
     echo "<label for='search'>Search:\n</label>";
     echo "<input type='text' id='search' name='search' value=$value>\n";
     echo "<input type='submit'>\n";
@@ -158,7 +159,7 @@ function buildTableEntries(array $results, array $attributes): void
         foreach ($results as $row) {
             echo "<tr class='data-row'>";
             foreach ($attributes as $a) {
-                if($a == 'user_id') {
+                if ($a == 'user_id') {
                     echo "<td><a href='userinfo.php?id=$row[$a]'>$row[$a]</a></td>";
                 } else {
                     echo "<td>$row[$a]</td>";
