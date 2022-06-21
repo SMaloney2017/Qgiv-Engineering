@@ -141,7 +141,6 @@ require 'GenerateHtmlHead.php' ?>
 
 <body>
 <form name='search' method='get'>
-
     <?php
     /* build radio buttons to select view (transactions / users) */
     buildRadioButton("radio", $radio, "transactions");
