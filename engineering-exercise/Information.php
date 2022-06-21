@@ -43,112 +43,6 @@ const ID_ATTRIBUTES = [
     'age',
 ];
 
-/**
- * Helper function adjusted for building navigation buttons for paginated
- * transaction results. Variables passed in are used to build an url which
- * retains the query as the page reloads.
- *
- * @param int $page
- * @param int $page_count
- * @param string $id
- * @param string $search
- * @param string $sorting
- * @param string $order
- * @return void
- */
-function buildInfoNavigation(
-    int $page,
-    int $page_count,
-    string $id,
-    string $search,
-    string $sorting,
-    string $order
-): void {
-    /* get base-url path */
-    $base_url = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-    /* if not viewing the first page of results */
-    if ($page > 1) {
-        $query = [
-            'id' => $id,
-            'page' => $page - 1,
-            'search' => $search,
-            'sorting' => $sorting,
-            'order' => $order
-        ];
-        /* build a new url retaining query (view, search-value and decremented page-number) */
-        $url = $base_url . "?" . http_build_query($query);
-        /* link to previous page of results */
-        echo "<a href='$url'>Previous</a>\t";
-    }
-
-    /* if there are remaining pages to view */
-    if ($page < $page_count) {
-        $query = [
-            'id' => $id,
-            'page' => $page + 1,
-            'search' => $search,
-            'sorting' => $sorting,
-            'order' => $order
-        ];
-        /* build a new url retaining query (view, search-value and incremented page-number) */
-        $url = $base_url . "?" . http_build_query($query);
-        /* link to next page of results */
-        echo "<a href='$url'>Next</a>";
-    }
-}
-
-/**
- * Helper function adjusted for building the table of transaction results.
- *
- * @param array $results
- * @param array $attributes
- * @return void
- */
-function buildInfoTableEntries(array $results, array $attributes): void
-{
-    echo "<tbody>";
-    if (!empty($results)) {
-        foreach ($results as $row) {
-            echo "<tr class='data-row'>";
-            foreach ($attributes as $a) {
-                if ($a == 'timestamp' || $a == 'registered_at') {
-                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
-                    echo "<td>$formatted_date</td>";
-                } else {
-                    if ($a == 'dob') {
-                        $formatted_date = date('F j, Y', strtotime($row[$a]));
-                        echo "<td>$formatted_date</td>";
-                    } else {
-                        if ($a == 'coordinates') {
-                            echo "<td>(" . $row['latitude'] . "," . $row['latitude'] . ")</td>";
-                        } else {
-                            echo "<td>$row[$a]</td>";
-                        }
-                    }
-                }
-            }
-            echo "</tr>";
-        }
-    }
-    echo "</tbody>";
-}
-
-/**
- * Helper function adjusted to the transactions table.
- *
- * @param array $results
- * @param array $attributes
- * @return void
- */
-function buildInfoTable(array $results, array $attributes): void
-{
-    echo "<table class='data-table'>";
-    buildTableHeader($attributes);
-    buildInfoTableEntries($results, $attributes);
-    echo "</table>";
-}
-
 /* get user_id */
 $user_id = '';
 if (isset($_GET['id'])) {
@@ -286,9 +180,9 @@ require 'GenerateHtmlHead.php' ?>
 
         /* build tables displaying relevant User information */
         echo "<h3>User Information</h3>";
-        buildTable($user_info, USER_ATTRIBUTES);
-        buildTable($user_info, LOCATION_ATTRIBUTES);
-        buildTable($user_info, ID_ATTRIBUTES);
+        buildInfoTable($user_info, USER_ATTRIBUTES);
+        buildInfoTable($user_info, LOCATION_ATTRIBUTES);
+        buildInfoTable($user_info, ID_ATTRIBUTES);
 
         /* build tables displaying User's transaction history */
         echo "<h3>Transaction History</h3>";
