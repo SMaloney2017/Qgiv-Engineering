@@ -169,9 +169,9 @@ require 'GenerateHtmlHead.php' ?>
 
     /* build selected table */
     if ($radio == 'users') {
-        buildTable($results, USER_ATTRIBUTES_BASIC);
+        buildInfoTable($results, USER_ATTRIBUTES_BASIC);
     } else {
-        buildTable($results, TRANSACTION_ATTRIBUTES);
+        buildInfoTable($results, TRANSACTION_ATTRIBUTES);
     }
     ?>
 </form>
