@@ -17,7 +17,7 @@
 
 - ✓ view a view of transactions with data displayed
 - ✓ format transactions in the following format: MM/DD/YYYY
-- default sorted by transaction ID
+- ✓ default sorted by transaction ID
 
 - ✓ view a view of users with data displayed
 - ✓ clicking the User ID takes you to a view that displays that users details and associated transactions
