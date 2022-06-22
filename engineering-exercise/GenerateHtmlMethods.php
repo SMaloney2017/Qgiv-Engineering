@@ -182,6 +182,38 @@ function buildTableHeader(array $attributes): void
  * @param array $attributes
  * @return void
  */
+function buildTableEntries(array $results, array $attributes): void
+{
+    echo "<tbody>";
+    if (!empty($results)) {
+        /* for each item */
+        foreach ($results as $row) {
+            echo "<tr class='data-row'>";
+            foreach ($attributes as $a) {
+                if ($a == 'timestamp') {
+                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
+                    echo "<td>$formatted_date</td>";
+                } else {
+                    if ($a == 'user_id') {
+                        echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
+                    } else {
+                        echo "<td>$row[$a]</td>";
+                    }
+                }
+            }
+            echo "</tr>";
+        }
+    }
+    echo "</tbody>";
+}
+
+/**
+ * Helper function which builds the table for the queried results.
+ *
+ * @param array $results
+ * @param array $attributes
+ * @return void
+ */
 function buildInfoTableEntries(array $results, array $attributes): void
 {
     echo "<tbody>";
@@ -189,20 +221,18 @@ function buildInfoTableEntries(array $results, array $attributes): void
         foreach ($results as $row) {
             echo "<tr class='data-row'>";
             foreach ($attributes as $a) {
-                if ($a == 'timestamp' || $a == 'registered_at') {
+                if ($a == 'user_id') {
+                    echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
+                } else if ($a == 'timestamp' || $a == 'registered_at') {
                     $formatted_date = date('m/d/Y', strtotime($row[$a]));
                     echo "<td>$formatted_date</td>";
+                } else if ($a == 'dob') {
+                    $formatted_date = date('F j, Y', strtotime($row[$a]));
+                    echo "<td>$formatted_date</td>";
+                } else if ($a == 'coordinates') {
+                    echo "<td>" . $row['latitude'] . ", " . $row['latitude'] . "</td>";
                 } else {
-                    if ($a == 'dob') {
-                        $formatted_date = date('F j, Y', strtotime($row[$a]));
-                        echo "<td>$formatted_date</td>";
-                    } else {
-                        if ($a == 'coordinates') {
-                            echo "<td>" . $row['latitude'] . ", " . $row['latitude'] . "</td>";
-                        } else {
-                            echo "<td>$row[$a]</td>";
-                        }
-                    }
+                    echo "<td>$row[$a]</td>";
                 }
             }
             echo "</tr>";
