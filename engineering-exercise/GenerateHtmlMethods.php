@@ -182,38 +182,6 @@ function buildTableHeader(array $attributes): void
  * @param array $attributes
  * @return void
  */
-function buildTableEntries(array $results, array $attributes): void
-{
-    echo "<tbody>";
-    if (!empty($results)) {
-        /* for each item */
-        foreach ($results as $row) {
-            echo "<tr class='data-row'>";
-            foreach ($attributes as $a) {
-                if ($a == 'timestamp') {
-                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
-                    echo "<td>$formatted_date</td>";
-                } else {
-                    if ($a == 'user_id') {
-                        echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
-                    } else {
-                        echo "<td>$row[$a]</td>";
-                    }
-                }
-            }
-            echo "</tr>";
-        }
-    }
-    echo "</tbody>";
-}
-
-/**
- * Helper function adjusted for building the table of transaction results.
- *
- * @param array $results
- * @param array $attributes
- * @return void
- */
 function buildInfoTableEntries(array $results, array $attributes): void
 {
     echo "<tbody>";
@@ -245,21 +213,6 @@ function buildInfoTableEntries(array $results, array $attributes): void
 
 /**
  * Helper function which builds the complete table.
- *
- * @param array $results
- * @param array $attributes
- * @return void
- */
-function buildTable(array $results, array $attributes): void
-{
-    echo "<table class='data-table'>";
-    buildTableHeader($attributes);
-    buildTableEntries($results, $attributes);
-    echo "</table>";
-}
-
-/**
- * Helper function adjusted to the transactions table.
  *
  * @param array $results
  * @param array $attributes
