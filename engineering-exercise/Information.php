@@ -14,35 +14,6 @@ const TRANSACTION_ATTRIBUTES = [
     'payment_method',
 ];
 
-const USER_ATTRIBUTES = [
-    'user_id',
-    'email',
-    'phone',
-    'cell',
-    'registered_at',
-    'account_age',
-];
-
-const LOCATION_ATTRIBUTES = [
-    'street',
-    'city',
-    'state',
-    'country',
-    'postcode',
-    'coordinates',
-    'offset',
-    'description',
-];
-
-const ID_ATTRIBUTES = [
-    'gender',
-    'title',
-    'first',
-    'last',
-    'dob',
-    'age',
-];
-
 /* get user_id */
 $user_id = '';
 if (isset($_GET['id'])) {
@@ -109,7 +80,7 @@ try {
 
     $run->execute($data);
     $run->setFetchMode(PDO::FETCH_ASSOC);
-    $user_info = $run->fetchAll();
+    $user_info = $run->fetch();
 
     /* retrieve User transactions */
     $sql = 'SELECT * from transactions
@@ -180,9 +151,7 @@ require 'GenerateHtmlHead.php' ?>
 
         /* build tables displaying relevant User information */
         echo "<h3>User Information</h3>";
-        buildInfoTable($user_info, USER_ATTRIBUTES);
-        buildInfoTable($user_info, LOCATION_ATTRIBUTES);
-        buildInfoTable($user_info, ID_ATTRIBUTES);
+        displayUserInformation($user_info);
 
         /* build tables displaying User's transaction history */
         echo "<h3>Transaction History</h3>";

@@ -182,38 +182,6 @@ function buildTableHeader(array $attributes): void
  * @param array $attributes
  * @return void
  */
-function buildTableEntries(array $results, array $attributes): void
-{
-    echo "<tbody>";
-    if (!empty($results)) {
-        /* for each item */
-        foreach ($results as $row) {
-            echo "<tr class='data-row'>";
-            foreach ($attributes as $a) {
-                if ($a == 'timestamp') {
-                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
-                    echo "<td>$formatted_date</td>";
-                } else {
-                    if ($a == 'user_id') {
-                        echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
-                    } else {
-                        echo "<td>$row[$a]</td>";
-                    }
-                }
-            }
-            echo "</tr>";
-        }
-    }
-    echo "</tbody>";
-}
-
-/**
- * Helper function which builds the table for the queried results.
- *
- * @param array $results
- * @param array $attributes
- * @return void
- */
 function buildInfoTableEntries(array $results, array $attributes): void
 {
     echo "<tbody>";
@@ -223,11 +191,8 @@ function buildInfoTableEntries(array $results, array $attributes): void
             foreach ($attributes as $a) {
                 if ($a == 'user_id') {
                     echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
-                } else if ($a == 'timestamp' || $a == 'registered_at') {
+                } else if ($a == 'timestamp') {
                     $formatted_date = date('m/d/Y', strtotime($row[$a]));
-                    echo "<td>$formatted_date</td>";
-                } else if ($a == 'dob') {
-                    $formatted_date = date('F j, Y', strtotime($row[$a]));
                     echo "<td>$formatted_date</td>";
                 } else if ($a == 'coordinates') {
                     echo "<td>" . $row['latitude'] . ", " . $row['latitude'] . "</td>";
@@ -254,4 +219,37 @@ function buildInfoTable(array $results, array $attributes): void
     buildTableHeader($attributes);
     buildInfoTableEntries($results, $attributes);
     echo "</table>";
+}
+
+/**
+ * Helper function which builds the user-information display.
+ * Opted to make this method rather than use buildTableEntries()
+ * to make the interface more readable
+ *
+ * @param array $userinfo
+ * @return void
+ */
+function displayUserInformation(array $userinfo): void
+{
+    echo "<table class='data-table'>";
+    echo "<tr class='data-row'><th>User ID:</th>";
+    echo "<td>" . $userinfo['user_id'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Name:</th>";
+    echo "<td>" . $userinfo['title'] . " " . $userinfo['first'] . " " . $userinfo['last'] . " " . "</td></tr>";
+    echo "<tr class='data-row'><th>Gender:</th>";
+    echo "<td>" . $userinfo['gender'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Date of Birth:</th>";
+    echo "<td>" . date("F j, Y", strtotime($userinfo['dob'])) . "</td></tr>";
+    echo "<tr class='data-row'><th>Phone:</th>";
+    echo "<td>" . $userinfo['phone'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Cell:</th>";
+    echo "<td>" . $userinfo['cell'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Account Registration:</th>";
+    echo "<td>" . $userinfo['registered_at'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Account Age:</th>";
+    echo "<td>" . $userinfo['account_age'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Address:</th>";
+    echo "<td>" . $userinfo['street'] . "<br>" . $userinfo['city'] . ", " . $userinfo['state'] . ", " . $userinfo['postcode'] . "</td></tr>";
+    echo "<tr class='data-row'><th>Time Zone:</th>";
+    echo "<td>" . $userinfo['offset'] . " " . $userinfo['description'] . "</td></tr></table>";
 }
