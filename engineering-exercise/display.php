@@ -51,13 +51,18 @@ if (isset($_GET['order'])) {
 
 /* verify sorting is a valid attribute to the selected table ->
    if sorting is NOT an attribute in the selected table,
-   default to a common value: user_id */
+   default to either user_id or transaction_id */
 if (!in_array($sorting, $radio == 'users' ? USER_ATTRIBUTES_BASIC : TRANSACTION_ATTRIBUTES)) {
-    $sorting = 'user_id';
-    $_GET['sorting'] = 'user_id';
+    if ($radio == 'users') {
+        $sorting = 'user_id';
+        $_GET['sorting'] = 'user_id';
+    } else {
+        $sorting = 'transaction_id';
+        $_GET['sorting'] = 'transaction_id';
+    }
 }
 
-/* retrieve and store value from text-field */
+/* text-field search parameter to narrow results */
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
@@ -65,7 +70,7 @@ if (isset($_GET['search'])) {
 
 $page = 1;
 $start = 0;
-/* retrieve and store page number from navigation links, default to page 1 */
+/* page and entry number for pagination, default page to 1, start to 0 */
 if (isset($_GET['page'])) {
     $page = max($_GET['page'], 1);
     $start = ($page - 1) * MAX_ROWS;
@@ -81,9 +86,10 @@ try {
     /* create a connection to the Database */
     $connection = new Connection();
     $pdo = $connection->getConnection();
+    /* ensure errors are handled as exceptions to be caught */
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    /* select attributes where search-value is like any of the attributes,
+    /* select attributes where search-value is like any of the important attributes,
        query either transactions or users depending on selected radio-button */
     $sql = $radio == 'users' ?
         'SELECT users.user_id, users.email, identification.first, identification.last, users.phone
@@ -114,10 +120,6 @@ try {
     $run->execute($data);
     $run->setFetchMode(PDO::FETCH_ASSOC);
     $results = $run->fetchAll();
-
-    /* close connection */
-    $connection = null;
-    $pdo = null;
 } catch (PDOException $e) {
     /* log any errors from either query execution */
     error_log('Error: ' . $e->getMessage());
