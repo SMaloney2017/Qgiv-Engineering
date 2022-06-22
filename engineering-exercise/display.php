@@ -10,9 +10,10 @@ const MAX_ROWS = 15;
    as well as verifying that the selected ordering is valid */
 const USER_ATTRIBUTES_BASIC = [
     'user_id',
-    'email',
     'first',
-    'last'
+    'last',
+    'email',
+    'phone'
 ];
 
 const TRANSACTION_ATTRIBUTES = [
@@ -85,12 +86,12 @@ try {
     /* select attributes where search-value is like any of the attributes,
        query either transactions or users depending on selected radio-button */
     $sql = $radio == 'users' ?
-        'SELECT users.user_id, users.email, identification.first, identification.last
+        'SELECT users.user_id, users.email, identification.first, identification.last, users.phone
             FROM users JOIN identification ON users.user_id = identification.user_id
-            WHERE users.user_id LIKE :search OR users.email LIKE :search OR identification.first LIKE :search OR identification.last LIKE :search'
+            WHERE users.user_id LIKE :search OR users.email LIKE :search OR identification.first LIKE :search OR identification.last LIKE :search OR users.phone LIKE :search'
         : 'SELECT transactions.transaction_id, transactions.user_id, transactions.timestamp, transactions.amount, transactions.status, transactions.payment_method
             FROM transactions
-            WHERE transactions.user_id LIKE :search OR transactions.transaction_id LIKE :search';
+            WHERE transactions.user_id LIKE :search OR transactions.transaction_id LIKE :search OR transactions.amount LIKE :search';
 
     $run = $pdo->prepare($sql);
     $data = [
