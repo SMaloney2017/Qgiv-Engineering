@@ -86,8 +86,8 @@ try {
     $sql = 'SELECT * from transactions
             WHERE transactions.user_id = :id
                 AND (transactions.transaction_id LIKE :search
-                OR transactions.user_id LIKE :search
-                OR transactions.amount LIKE :search)';
+                OR transactions.amount LIKE :search
+                OR transactions.payment_method LIKE :search)';
     $run = $pdo->prepare($sql);
     $data = [
         ':id' => $user_id,
