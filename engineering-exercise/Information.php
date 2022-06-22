@@ -4,7 +4,7 @@ require './Database/Connection.php';
 require 'GenerateHtmlMethods.php';
 
 /* max rows for pagination */
-const MAX_ROWS = 15;
+const MAX_ROWS = 1;
 
 const TRANSACTION_ATTRIBUTES = [
     'transaction_id',
@@ -151,7 +151,7 @@ require 'GenerateHtmlHead.php' ?>
 
         /* build tables displaying relevant User information */
         echo "<h3>User Information</h3>";
-        displayUserInformation($user_info);
+        buildUserInformation($user_info);
 
         /* build tables displaying User's transaction history */
         echo "<h3>Transaction History</h3>";
@@ -168,7 +168,7 @@ require 'GenerateHtmlHead.php' ?>
         buildSearchField($search);
 
         /* builds 'Previous' and 'Next' buttons for paginated results */
-        buildInfoNavigation($page, $page_count, $user_id, $search, $sorting, $order);
+        buildNavigation($page, $page_count, $search, $sorting, $order, $radio = 0, $user_id);
         echo "<br><hr>";
 
         buildInfoTable($transaction_history, TRANSACTION_ATTRIBUTES);

@@ -24,19 +24,21 @@ function buildRadioButton(string $name, string $value, string $label): void
  *
  * @param int $page
  * @param int $page_count
- * @param string $radio
  * @param string $search
  * @param string $sorting
  * @param string $order
+ * @param string $radio (optional)
+ * @param string $id (optional)
  * @return void
  */
 function buildNavigation(
     int $page,
     int $page_count,
-    string $radio,
     string $search,
     string $sorting,
-    string $order
+    string $order,
+    string $radio = '0',
+    string $id = '0',
 ): void {
     /* get base-url path */
     $base_url = parse_url($_SERVER['REQUEST_URI'])['path'];
@@ -48,7 +50,8 @@ function buildNavigation(
             'page' => $page - 1,
             'search' => $search,
             'sorting' => $sorting,
-            'order' => $order
+            'order' => $order,
+            'id' => $id
         ];
         /* build a new url retaining query (view, search-value and decremented page-number) */
         $url = $base_url . "?" . http_build_query($query);
@@ -63,7 +66,8 @@ function buildNavigation(
             'page' => $page + 1,
             'search' => $search,
             'sorting' => $sorting,
-            'order' => $order
+            'order' => $order,
+            'id' => $id
         ];
         /* build a new url retaining query (view, search-value and incremented page-number) */
         $url = $base_url . "?" . http_build_query($query);
@@ -72,60 +76,6 @@ function buildNavigation(
     }
 }
 
-/**
- * Helper function adjusted for building navigation buttons for paginated
- * transaction results. Variables passed in are used to build an url which
- * retains the query as the page reloads.
- *
- * @param int $page
- * @param int $page_count
- * @param string $id
- * @param string $search
- * @param string $sorting
- * @param string $order
- * @return void
- */
-function buildInfoNavigation(
-    int $page,
-    int $page_count,
-    string $id,
-    string $search,
-    string $sorting,
-    string $order
-): void {
-    /* get base-url path */
-    $base_url = parse_url($_SERVER['REQUEST_URI'])['path'];
-
-    /* if not viewing the first page of results */
-    if ($page > 1) {
-        $query = [
-            'id' => $id,
-            'page' => $page - 1,
-            'search' => $search,
-            'sorting' => $sorting,
-            'order' => $order
-        ];
-        /* build a new url retaining query (view, search-value and decremented page-number) */
-        $url = $base_url . "?" . http_build_query($query);
-        /* link to previous page of results */
-        echo "<a href='$url'>Previous</a>\t";
-    }
-
-    /* if there are remaining pages to view */
-    if ($page < $page_count) {
-        $query = [
-            'id' => $id,
-            'page' => $page + 1,
-            'search' => $search,
-            'sorting' => $sorting,
-            'order' => $order
-        ];
-        /* build a new url retaining query (view, search-value and incremented page-number) */
-        $url = $base_url . "?" . http_build_query($query);
-        /* link to next page of results */
-        echo "<a href='$url'>Next</a>";
-    }
-}
 
 /**
  * Helper function which builds the menu entries used to select
@@ -229,7 +179,7 @@ function buildInfoTable(array $results, array $attributes): void
  * @param array $userinfo
  * @return void
  */
-function displayUserInformation(array $userinfo): void
+function buildUserInformation(array $userinfo): void
 {
     echo "<table class='data-table'>";
     echo "<tr class='data-row'><th>User ID:</th>";
