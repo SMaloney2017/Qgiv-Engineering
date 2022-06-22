@@ -91,7 +91,7 @@ try {
             WHERE users.user_id LIKE :search OR users.email LIKE :search OR identification.first LIKE :search OR identification.last LIKE :search OR users.phone LIKE :search'
         : 'SELECT transactions.transaction_id, transactions.user_id, transactions.timestamp, transactions.amount, transactions.status, transactions.payment_method
             FROM transactions
-            WHERE transactions.user_id LIKE :search OR transactions.transaction_id LIKE :search OR transactions.amount LIKE :search';
+            WHERE transactions.user_id LIKE :search OR transactions.transaction_id LIKE :search OR transactions.amount LIKE :search OR transactions.payment_method LIKE :search';
 
     $run = $pdo->prepare($sql);
     $data = [
