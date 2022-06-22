@@ -2,7 +2,7 @@
 
 /**
  * Helper function for building radio buttons,
- * where name is the name of the variable,
+ * where name is the name of the reference,
  * value is the reference to the variable,
  * and label is the actual value.
  *
@@ -97,8 +97,8 @@ function buildMenuEntries(string $sorting, array $attributes): void
 
 /**
  * Helper function which builds a text-field used to narrow results.
- * Searching users finds similar values to user_id, email, first-name, and last-name.
- * Searching transactions finds similar values to transaction_id and user_id.
+ * Searching users finds similar values to user_id, email, first-name, last-name, and phone.
+ * Searching transactions finds similar values to transaction_id, user_id, amount, and payment_method.
  *
  * @param string $value
  * @return void
@@ -111,7 +111,7 @@ function buildSearchField(string $value): void
 }
 
 /**
- * Helper function which builds the table-header.
+ * Helper function which builds a table-header from attributes.
  *
  * @param array $attributes
  * @return void
@@ -127,6 +127,7 @@ function buildTableHeader(array $attributes): void
 
 /**
  * Helper function which builds the table for the queried results.
+ * Special cases necessary to format user_id, timestamp, and coordinates.
  *
  * @param array $results
  * @param array $attributes
@@ -141,13 +142,17 @@ function buildInfoTableEntries(array $results, array $attributes): void
             foreach ($attributes as $a) {
                 if ($a == 'user_id') {
                     echo "<td><a href='Information.php?id=$row[$a]'>$row[$a]</a></td>";
-                } else if ($a == 'timestamp') {
-                    $formatted_date = date('m/d/Y', strtotime($row[$a]));
-                    echo "<td>$formatted_date</td>";
-                } else if ($a == 'coordinates') {
-                    echo "<td>" . $row['latitude'] . ", " . $row['latitude'] . "</td>";
                 } else {
-                    echo "<td>$row[$a]</td>";
+                    if ($a == 'timestamp') {
+                        $formatted_date = date('m/d/Y', strtotime($row[$a]));
+                        echo "<td>$formatted_date</td>";
+                    } else {
+                        if ($a == 'coordinates') {
+                            echo "<td>" . $row['latitude'] . ", " . $row['latitude'] . "</td>";
+                        } else {
+                            echo "<td>$row[$a]</td>";
+                        }
+                    }
                 }
             }
             echo "</tr>";
@@ -173,8 +178,8 @@ function buildInfoTable(array $results, array $attributes): void
 
 /**
  * Helper function which builds the user-information display.
- * Opted to make this method rather than use buildTableEntries()
- * to make the interface more readable
+ * Opted to make this method rather than reuse buildTableEntries()
+ * to make the interface more readable.
  *
  * @param array $userinfo
  * @return void
