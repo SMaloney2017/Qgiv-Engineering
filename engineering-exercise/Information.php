@@ -22,7 +22,7 @@ if (isset($_GET['id'])) {
     echo "No user_id selected.";
 }
 
-/* sort by attribute */
+/* sort by attribute, default transaction_id */
 $sorting = 'transaction_id';
 if (isset($_GET['sorting'])) {
     $sorting = $_GET['sorting'];
@@ -38,7 +38,7 @@ if (isset($_GET['order'])) {
     $_GET['order'] = 'ASC';
 }
 
-/* retrieve and store value from text-field */
+/* search value from text-field */
 $search = '';
 if (isset($_GET['search'])) {
     $search = $_GET['search'];
@@ -46,7 +46,7 @@ if (isset($_GET['search'])) {
 
 $page = 1;
 $start = 0;
-/* retrieve and store page number from navigation links, default to page 1 */
+/* page and start numbers for pagination, default to page 1, start to 0 */
 if (isset($_GET['page'])) {
     $page = max($_GET['page'], 1);
     $start = ($page - 1) * MAX_ROWS;
@@ -63,6 +63,7 @@ try {
     /* create a connection to the Database */
     $connection = new Connection();
     $pdo = $connection->getConnection();
+    /* ensure errors are handled as exceptions to be caught */
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     /* retrieve User information */
@@ -82,7 +83,7 @@ try {
     $run->setFetchMode(PDO::FETCH_ASSOC);
     $user_info = $run->fetch();
 
-    /* retrieve User transactions */
+    /* retrieve User transactions where search if like either, transaction_id, amount, or payment_method */
     $sql = 'SELECT * from transactions
             WHERE transactions.user_id = :id
                 AND (transactions.transaction_id LIKE :search
@@ -111,10 +112,6 @@ try {
 
     $run->setFetchMode(PDO::FETCH_ASSOC);
     $transaction_history = $run->fetchAll();
-
-    /* close connection */
-    $connection = null;
-    $pdo = null;
 } catch (PDOException $e) {
     /* log any errors from either query execution */
     error_log('Error: ' . $e->getMessage());
