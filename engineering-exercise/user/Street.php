@@ -20,7 +20,7 @@ class Street
      */
     public function getStreetAddress(): string
     {
-        return $this->getNumber() . $this->getName();
+        return $this->getNumber() . ' ' . $this->getName();
     }
 
     /**
