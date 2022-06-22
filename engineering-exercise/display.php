@@ -4,7 +4,7 @@ require 'GenerateHtmlMethods.php';
 require './Database/Connection.php';
 
 /* max rows for pagination */
-const MAX_ROWS = 15;
+const MAX_ROWS = 10;
 
 /* attributes for dynamically building menu's and headers,
    as well as verifying that the selected ordering is valid */
@@ -165,7 +165,7 @@ require 'GenerateHtmlHead.php' ?>
     buildSearchField($search);
 
     /* builds 'Previous' and 'Next' buttons for paginated results */
-    buildNavigation($page, $page_count, $radio, $search, $sorting, $order);
+    buildNavigation($page, $page_count, $search, $sorting, $order, $radio);
     echo "<br><hr>";
 
     /* build selected table */

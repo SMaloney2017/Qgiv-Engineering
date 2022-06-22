@@ -4,7 +4,7 @@ require './Database/Connection.php';
 require 'GenerateHtmlMethods.php';
 
 /* max rows for pagination */
-const MAX_ROWS = 1;
+const MAX_ROWS = 10;
 
 const TRANSACTION_ATTRIBUTES = [
     'transaction_id',
